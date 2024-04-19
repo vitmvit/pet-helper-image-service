@@ -1,0 +1,37 @@
+plugins {
+    id 'java'
+    id "io.freefair.lombok" version "8.4"
+    id 'org.springframework.boot' version '3.2.1'
+    id 'io.spring.dependency-management' version '1.1.4'
+}
+
+group 'by.vitikova.discovery'
+version '1.0'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    implementation "by.vitikova.discovery:dto-lib:1.0"
+    implementation "by.vitikova.discovery:logging-spring-boot-starter:2.0"
+    implementation "by.vitikova.discovery:exception-error-handler-spring-boot-starter:2.0"
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation "org.springframework.boot:spring-boot-starter-data-jpa:3.2.1"
+    implementation 'org.springframework.boot:spring-boot-starter-validation:3.2.1'
+    implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap:4.1.0'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'commons-io:commons-io:2.11.0'
+
+    implementation "org.postgresql:postgresql:42.6.0"
+
+    implementation "org.springframework.cloud:spring-cloud-config-client:4.1.0"
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+}
+
+test {
+    useJUnitPlatform()
+}
