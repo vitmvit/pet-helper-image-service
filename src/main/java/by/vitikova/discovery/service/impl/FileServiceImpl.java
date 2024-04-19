@@ -24,6 +24,10 @@ import java.nio.file.Paths;
 import java.util.Random;
 import java.util.UUID;
 
+/**
+ * Реализация сервиса для работы с файлами.
+ * Класс обеспечивает функционал сохранения, получения, удаления файлов и работы с ресурсами.
+ */
 @Service
 public class FileServiceImpl implements FileService {
 
@@ -43,6 +47,13 @@ public class FileServiceImpl implements FileService {
         random = new Random();
     }
 
+    /**
+     * Сохраняет переданный файл на сервере.
+     *
+     * @param multipartFile загруженный файл
+     * @return DTO с информацией о сохраненном файле
+     * @throws SaveImageException если возникает ошибка при сохранении файла
+     */
     @Override
     public ImageResponseDto save(MultipartFile multipartFile) {
         String uuid = UUID.randomUUID().toString();
@@ -73,6 +84,14 @@ public class FileServiceImpl implements FileService {
         }
     }
 
+    /**
+     * Получает содержимое файла в формате base64.
+     *
+     * @param filePath путь к файлу
+     * @param mimeType MIME-тип файла
+     * @return строка в формате base64, представляющая содержимое файла
+     * @throws RuntimeException если возникает ошибка при чтении файла
+     */
     @Override
     public String base64(String filePath, String mimeType) {
         try {
@@ -85,6 +104,13 @@ public class FileServiceImpl implements FileService {
         }
     }
 
+    /**
+     * Получает ресурс файла по его пути.
+     *
+     * @param filePath путь к файлу
+     * @return ресурс файла
+     * @throws RuntimeException если возникает ошибка при получении ресурса
+     */
     @Override
     public Resource resource(String filePath) {
         File file = new File(filePath);
@@ -97,16 +123,29 @@ public class FileServiceImpl implements FileService {
         }
     }
 
+    /**
+     * Получает содержимое файла в виде массива байтов.
+     *
+     * @param filePath путь к файлу
+     * @return массив байтов, представляющий содержимое файла
+     * @throws RuntimeException если возникает ошибка при чтении файла
+     */
     @Override
     public byte[] bytes(String filePath) {
         try {
             return Files.readAllBytes(Paths.get(filePath));
         } catch (IOException ex) {
-            // todo: kaa: jhasgdjhgasd
+            // todo: обработка
             throw new RuntimeException(ex);
         }
     }
 
+    /**
+     * Удаляет файл по его пути.
+     *
+     * @param filePath путь к файлу
+     * @throws FileSystemException если возникает ошибка при удалении файла
+     */
     @Override
     public void remove(String filePath) throws FileSystemException {
         File file = new File(fileStorage + filePath);
@@ -117,6 +156,11 @@ public class FileServiceImpl implements FileService {
         }
     }
 
+    /**
+     * Генерирует путь для сохранения файла на основе настроек приложения.
+     *
+     * @return сгенерированный путь для сохранения файла
+     */
     private String filePath() {
         StringBuilder path = new StringBuilder("/");
         for (int i = 0; i < fileDeep; i++) {
@@ -125,6 +169,11 @@ public class FileServiceImpl implements FileService {
         return path.toString();
     }
 
+    /**
+     * Генерирует случайную букву в диапазоне от 'a' до 'z'.
+     *
+     * @return случайная буква
+     */
     private char randomLetter() {
         return (char) (random.nextInt(MAX - MIN + 1) + MIN);
     }

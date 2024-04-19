@@ -4,19 +4,19 @@ import by.vitikova.discovery.converter.AvatarConverter;
 import by.vitikova.discovery.model.dto.ImageRequestDto;
 import by.vitikova.discovery.model.dto.ImageResponseDto;
 import by.vitikova.discovery.repository.AvatarRepository;
-import by.vitikova.discovery.service.FileService;
 import by.vitikova.discovery.service.AvatarService;
+import by.vitikova.discovery.service.FileService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.nio.file.FileSystemException;
 
+/**
+ * Реализация сервиса для работы с аватарками.
+ * Класс обеспечивает функционал получения, сохранения и удаления аватарок пользователей.
+ */
 @AllArgsConstructor
 @Service
 public class AvatarServiceImpl implements AvatarService {
@@ -27,6 +27,13 @@ public class AvatarServiceImpl implements AvatarService {
     private final FileService fileService;
     private final AvatarConverter converter;
 
+    /**
+     * Получает изображение в формате base64 по его уникальному идентификатору.
+     *
+     * @param uuid уникальный идентификатор изображения
+     * @return строка в формате base64, представляющая изображение
+     * @throws EntityNotFoundException если изображение не найдено по указанному идентификатору
+     */
     @Override
     public String base64(String uuid) {
         var avatar = repository.findByGeneratedName(uuid).orElseThrow(
@@ -38,6 +45,13 @@ public class AvatarServiceImpl implements AvatarService {
         );
     }
 
+    /**
+     * Получает изображение в виде массива байтов по его уникальному идентификатору.
+     *
+     * @param uuid уникальный идентификатор изображения
+     * @return массив байтов, представляющий изображение
+     * @throws EntityNotFoundException если изображение не найдено по указанному идентификатору
+     */
     @Override
     public byte[] bytes(String uuid) {
         var image = repository.findByGeneratedName(uuid).orElseThrow(
@@ -48,6 +62,13 @@ public class AvatarServiceImpl implements AvatarService {
         );
     }
 
+    /**
+     * Находит изображение по его уникальному идентификатору и преобразует его в DTO.
+     *
+     * @param uuid уникальный идентификатор изображения
+     * @return DTO с информацией об изображении
+     * @throws EntityNotFoundException если изображение не найдено по указанному идентификатору
+     */
     @Override
     public ImageResponseDto findByUuid(String uuid) {
         return converter.convert(
@@ -57,6 +78,12 @@ public class AvatarServiceImpl implements AvatarService {
         );
     }
 
+    /**
+     * Сохраняет аватар пользователя, представленный в виде MultipartFile.
+     *
+     * @param multipartFile файл аватара пользователя
+     * @return DTO с информацией о сохраненном изображении
+     */
     @Override
     public ImageResponseDto save(MultipartFile multipartFile) {
         var imageResponseDto = fileService.save(multipartFile);
@@ -69,6 +96,13 @@ public class AvatarServiceImpl implements AvatarService {
         throw new RuntimeException("Not implemented");
     }
 
+    /**
+     * Удаляет аватар пользователя по его уникальному идентификатору.
+     *
+     * @param uuid уникальный идентификатор изображения
+     * @throws EntityNotFoundException если изображение не найдено по указанному идентификатору
+     * @throws RuntimeException        если возникает ошибка при удалении файла
+     */
     @Override
     public void remove(String uuid) {
         var image = repository.findByGeneratedName(uuid).orElseThrow(
