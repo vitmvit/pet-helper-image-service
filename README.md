@@ -4,9 +4,6 @@
 
 Данный микросервис предоставляет функционал для работы с изображениями и аватарами.
 
-## ChatController (8084/api/v1/chats)
-
-
 ### Reference Documentation
 
 For further reference, please consider the following sections:
@@ -29,3 +26,23 @@ The following guides illustrate how to use some features concretely:
 * [Validation](https://spring.io/guides/gs/validating-form-input/)
 * [Accessing data with MySQL](https://spring.io/guides/gs/accessing-data-mysql/)
 
+## AvatarController (8086/api/v1/avatars)
+
+Контроллер поддерживает следующие операции:
+
+- получение base64 по uuid аватара (/base64)
+- получение byte[] по uuid аватара (/bytes)
+- получение ImageResponseDto по uuid аватара (/info)
+- сохванение аватара с помощью MultipartFile (/save/img)
+- удаление аватара по uuid (/remove)
+
+## ImageController (8086/api/v1/ImageController)
+
+Контроллер поддерживает следующие операции:
+
+- получение base64 по uuid изображения (/base64)
+- получение byte[] по uuid изображения (/bytes)
+- получение ImageResponseDto по uuid изображения (/info)
+- сохванение изображения с помощью MultipartFile (/save/img)
+- обновление изображения с по dto (/save/dto)
+- удаление изображения по uuid (/remove)
