@@ -9,8 +9,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@DiscriminatorValue("i")
-public class Image extends ParentEntity {
-
-    private String description;
+@DiscriminatorValue("s")
+public class State extends ParentEntity {
 }

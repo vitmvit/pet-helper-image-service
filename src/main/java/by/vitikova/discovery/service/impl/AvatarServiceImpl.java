@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.nio.file.FileSystemException;
+import java.util.List;
 
 /**
  * Реализация сервиса для работы с аватарками.
@@ -76,6 +77,12 @@ public class AvatarServiceImpl implements AvatarService {
                         () -> new EntityNotFoundException("Avatar not found by uuid: " + uuid)
                 )
         );
+    }
+
+    @Override
+    public List<ImageResponseDto> findAll() {
+        // TODO: 02.05.2024  
+        return null;
     }
 
     /**

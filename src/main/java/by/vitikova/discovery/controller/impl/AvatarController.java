@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/v1/avatars")
@@ -34,6 +36,12 @@ public class AvatarController implements CommonController {
         return dto == null
                 ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
                 : new ResponseEntity<>(avatarService.findByUuid(uuid), HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<List<ImageResponseDto>> findAll() {
+        // TODO: 02.05.2024  
+        return null;
     }
 
     @Override
