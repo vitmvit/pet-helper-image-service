@@ -81,8 +81,7 @@ public class AvatarServiceImpl implements AvatarService {
 
     @Override
     public List<ImageResponseDto> findAll() {
-        // TODO: 02.05.2024  
-        return null;
+        throw new RuntimeException("Not implemented");
     }
 
     /**
