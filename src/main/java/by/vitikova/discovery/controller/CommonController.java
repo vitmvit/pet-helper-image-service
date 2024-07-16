@@ -2,14 +2,11 @@ package by.vitikova.discovery.controller;
 
 import by.vitikova.discovery.model.dto.ImageRequestDto;
 import by.vitikova.discovery.model.dto.ImageResponseDto;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 public interface CommonController {
 
@@ -21,6 +18,9 @@ public interface CommonController {
 
     @GetMapping(value = "/info", produces = "application/json")
     ResponseEntity<ImageResponseDto> findByUuid(@RequestParam String uuid);
+
+    @GetMapping
+    ResponseEntity<List<ImageResponseDto>> findAll();
 
     @PostMapping(value = "/save/img", produces = "application/json")
     ResponseEntity<ImageResponseDto> save(@RequestPart("image") MultipartFile image);

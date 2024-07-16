@@ -1,15 +1,15 @@
 package by.vitikova.discovery.converter.impl;
 
-import by.vitikova.discovery.converter.ImageConverter;
+import by.vitikova.discovery.converter.StateConverter;
 import by.vitikova.discovery.model.dto.ImageResponseDto;
-import by.vitikova.discovery.model.entity.Image;
+import by.vitikova.discovery.model.entity.State;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ImageConverterImpl implements ImageConverter {
+public class StateConverterImpl implements StateConverter {
 
     @Override
-    public ImageResponseDto convert(Image source) {
+    public ImageResponseDto convert(State source) {
         if (source == null) {
             return null;
         }
@@ -18,21 +18,20 @@ public class ImageConverterImpl implements ImageConverter {
         target.setOriginalName(source.getOriginalName());
         target.setMimeType(source.getMimeType());
         target.setFilePath(source.getFilePath());
-        target.setDescription(source.getDescription());
         return target;
     }
 
+
     @Override
-    public Image convert(ImageResponseDto source) {
+    public State convert(ImageResponseDto source) {
         if (source == null) {
             return null;
         }
-        Image target = new Image();
+        State target = new State();
         target.setGeneratedName(source.getGeneratedName());
         target.setOriginalName(source.getOriginalName());
         target.setMimeType(source.getMimeType());
         target.setFilePath(source.getFilePath());
-        target.setDescription(source.getDescription());
         return target;
     }
 }

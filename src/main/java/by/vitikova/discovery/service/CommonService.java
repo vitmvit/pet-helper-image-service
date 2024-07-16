@@ -2,8 +2,9 @@ package by.vitikova.discovery.service;
 
 import by.vitikova.discovery.model.dto.ImageRequestDto;
 import by.vitikova.discovery.model.dto.ImageResponseDto;
-import org.springframework.core.io.Resource;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 public interface CommonService {
 
@@ -12,6 +13,8 @@ public interface CommonService {
     byte[] bytes(String uuid);
 
     ImageResponseDto findByUuid(String uuid);
+
+    List<ImageResponseDto> findAll();
 
     ImageResponseDto save(MultipartFile multipartFile);
 

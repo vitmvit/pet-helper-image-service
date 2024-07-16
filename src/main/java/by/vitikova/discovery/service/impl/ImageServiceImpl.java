@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.nio.file.FileSystemException;
+import java.util.List;
 
 /**
  * Реализация сервиса для работы с изображениями.
@@ -71,6 +72,11 @@ public class ImageServiceImpl implements ImageService {
     @Override
     public ImageResponseDto findByUuid(String uuid) {
         return converter.convert(repository.findByGeneratedName(uuid).orElse(null));
+    }
+
+    @Override
+    public List<ImageResponseDto> findAll() {
+        throw new RuntimeException("Not implemented");
     }
 
     /**

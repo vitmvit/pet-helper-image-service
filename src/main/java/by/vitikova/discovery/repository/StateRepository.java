@@ -1,13 +1,13 @@
 package by.vitikova.discovery.repository;
 
-import by.vitikova.discovery.model.entity.Avatar;
+import by.vitikova.discovery.model.entity.State;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface AvatarRepository extends JpaRepository<Avatar, String> {
+public interface StateRepository extends JpaRepository<State, String> {
 
-    Optional<Avatar> findByGeneratedName(String name);
+    Optional<State> findByGeneratedName(String name);
 }
